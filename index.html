@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+ <html lang="en"> 
+ <head> 
+     <meta charset="UTF-8"> 
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+     <title>New to Do List</title> 
+     <link rel="stylesheet" href="./index.css"> 
+     <link rel="stylesheet" href="./fontawesome/css/all.min.css.css"> 
+ </head> 
+ <body> 
+     <section class="do"> 
+         <div class="news"> 
+             <div class="new" id="name"> 
+                 <h2>TO DO </h2> 
+                 <p>Reminds Everythings</p> 
+             </div> 
+             <div class="new" id="wel"> 
+                 <h2>Welcome Back</h2> 
+                 <button id="visit">Visit List</button> 
+             </div> 
+             <div class="new" id="display"> 
+                 <div class="displays"> 
+                     <div class="display"> 
+                        <div class="cals">
+                            <div class="cal"><p id="day"></p></div>
+                            <div class="cal"><h2>TO DO LIST</h2></div>
+                            <div class="cal"><p id="time"></p></div>
+                         </div>
+                     </div> 
+                     <div class="display"> 
+                         <div class="results" id="results"></div> 
+                     </div> 
+                     <div class="display"> 
+                         <ul> 
+                             <li><button id="home2"> <i class="fa-solid fa-house" id="homeIcon"></i></button></li> 
+                             <li><button id="completes1"><i class="fa-solid fa-square-check" style="color: #13d7a6; font-size: 20px;"></i></button></li> 
+                             <li><button id="add"><i class="fa-solid fa-plus" style="padding: 4px; background-color: #13d7a6; border-radius: 20px; color: white;"></i></button></li> 
+                             <li><button id="expires1"><i class="fa-solid fa-xmark" style="color: red; font-size: 20px;"></i></button></li> 
+                             <li><button id="count" style="padding: 2px 6px; background-color: red; border-radius: 20px; color: white;">0</button></li> 
+                         </ul> 
+                     </div> 
+                 </div> 
+             </div> 
+             <div class="new" id="write"> 
+                 <div class="displays"> 
+                     <div class="display"> 
+                        <div class="cals">
+                            <div class="cal"><p id="day1"></p></div>
+                            <div class="cal"><h2>INPUT TASK</h2></div>
+                            <div class="cal"><p id="time1"></p></div>
+                         </div>
+                     </div> 
+                     <div class="display"> 
+                         <div class="enters"> 
+                             <div class="enter"> 
+                                 <p>Title:</p> 
+                                 <input type="text" id="title"> 
+                             </div> 
+                             <div class="enter"> 
+                                 <p>Date:</p> 
+                                 <input type="date" name="" id="date"> 
+                             </div> 
+                             <div class="enter"> 
+                                 <p>Time:</p> 
+                                 <div class="times"> 
+                                     <div class="time"> 
+                                         <p>Start:</p> 
+                                         <input type="time" name="" id="startTime"> 
+                                     </div> 
+                                     <div class="time"> 
+                                         <p>Stop:</p> 
+                                         <input type="time" name="" id="stopTime"> 
+                                     </div> 
+                                 </div> 
+                             </div> 
+                         </div> 
+                         <div class="save"><button id="save">Save</button></div> 
+                     </div> 
+                     <div class="display"> 
+                         <ul> 
+                             <li><button id="home"> <i class="fa-solid fa-house"></i></button></li> 
+                             <li><button id="completes2"> <i class="fa-solid fa-square-check" style="color: #13d7a6; font-size: 20px;"></i></button></li> 
+                             <li><button id="add"><i class="fa-solid fa-plus" style="padding: 4px; background-color: #13d7a6; border-radius: 20px; color: white;"></i></button></li> 
+                             <li><button id="expires2"><i class="fa-solid fa-xmark" style="color: red; font-size: 20px;"></i></button></li> 
+                             <li><button id="count1" style="padding: 2px 6px; background-color: red; border-radius: 20px; color: white;">0</button></li> 
+                         </ul> 
+                     </div> 
+                 </div> 
+             </div> 
+             <div class="new" id="completed"> 
+                 <div class="displays"> 
+                     <div class="display"> 
+                        <div class="cals">
+                            <div class="cal"><p id="day3"></p></div>
+                            <div class="cal"><h2>DONE TASK</h2></div>
+                            <div class="cal"><p id="time3"></p></div>
+                         </div>
+                     </div> 
+                     <div class="display">
+                        <div class="dones" id="dones"></div> 
+                         
+                     </div> 
+                     <div class="display"> 
+                         <ul> 
+                             <li><button id="home3"> <i class="fa-solid fa-house"></i></button></li> 
+                             <li><button id="completes3"> <i class="fa-solid fa-square-check" style="color: #13d7a6; font-size: 20px;"></i></button></li> 
+                             <li><button id="add1"><i class="fa-solid fa-plus" style="padding: 4px; background-color: #13d7a6; border-radius: 20px; color: white;"></i></button></li> 
+                             <li><button id="expires3"><i class="fa-solid fa-xmark" style="color: red; font-size: 20px;"></i></button></li> 
+                             <li><button id="count2" style="padding: 2px 6px; background-color: red; border-radius: 20px; color: white;">0</button></li> 
+                         </ul> 
+                     </div> 
+                 </div> 
+             </div> 
+             <div class="new" id="expired"> 
+                 <div class="displays"> 
+                     <div class="display"> 
+                        <div class="cals">
+                            <div class="cal"><p id="day4"></p></div>
+                            <div class="cal"><h2>VOID TASK</h2></div>
+                            <div class="cal"><p id="time4"></p></div>
+                         </div>
+                     </div> 
+                     <div class="display"> 
+                         
+                     </div> 
+                     <div class="display"> 
+                         <ul> 
+                             <li><button id="home4"> <i class="fa-solid fa-house"></i></button></li> 
+                             <li><button id="completes4"> <i class="fa-solid fa-square-check" style="color: #13d7a6; font-size: 20px;"></i></button></li> 
+                             <li><button id="add2"><i class="fa-solid fa-plus" style="padding: 4px; background-color: #13d7a6; border-radius: 20px; color: white;"></i></button></li> 
+                             <li><button id="expires4"><i class="fa-solid fa-xmark" style="color: red; font-size: 20px;"></i></button></li> 
+                             <li><button id="count3" style="padding: 2px 6px; background-color: red; border-radius: 20px; color: white;">0</button></li> 
+                         </ul> 
+                     </div> 
+                 </div> 
+             </div> 
+             <div class="new" id="history"></div> 
+         </div> 
+     </section> 
+ </body> 
+ <script src="./index.js"></script> 
+ </html>
