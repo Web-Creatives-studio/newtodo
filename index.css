@@ -12,7 +12,7 @@
      height: 90vh; 
      margin: 0 auto; 
      box-shadow: 0px 0px 2px 2px #00000061; 
-     background-color: #2a2c41; 
+     background-color:#13d7a6; 
  } 
  .news{ 
      display: grid; 
@@ -57,6 +57,7 @@
  /*SECOND SCREEN*/ 
  .new:nth-child(3){ 
      background-color: #2a2c41; 
+     margin: none;
  } 
  .displays{ 
      display: grid; 
@@ -71,18 +72,20 @@
   .cals{
     display: grid;
     grid-template-columns: 2fr 2.5fr 1.5fr;
+    padding-bottom: 20px;
+    background-color: #13d7a6;
   }
+
   .cal{
     margin: auto 0;
   }
   .cal p{
-    color: #13d7a6;
+    color: #fff;
   }
  .display h2{ 
-     color:white ; 
+     color:#1c1f32; 
  } 
  .display:first-child{ 
-  
      margin: none; 
  } 
  .display:last-child{ 
@@ -91,10 +94,11 @@
      padding-bottom: 10px; 
  } 
  .display:nth-child(2){ 
-     height:74vh; 
+     height:71vh; 
      overflow-y: scroll; 
      padding-bottom: 10px; 
      scroll-behavior: smooth; 
+     background-color: #2c3049;
  } 
  ::-webkit-scrollbar{ 
      width: 3px; 

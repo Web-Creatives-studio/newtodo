@@ -23,10 +23,10 @@ const name= document.getElementById("name")
  const expires3 =document.getElementById("expires3")
  const expires4 =document.getElementById("expires4")
 
- 
+ // Load saved courses from local storage on page load
 window.addEventListener("load", () => {
     let savedCourses = JSON.parse(localStorage.getItem("courses")) || [];
-    
+    // Loop through saved courses and display them on the page
     savedCourses.forEach(courseObj => {
         results.innerHTML +=` 
         <div class="shows" id="shows"> 
@@ -84,7 +84,7 @@ doneButton.addEventListener("click", () => {
             dones.innerHTML+=`""`
             document.getElementById("count").innerHTML=shows.length
             document.getElementById("count1").innerHTML=shows.length
-            document.getElementById("count2").innerHTML=dones.length
+            document.getElementById("count2").innerHTML=shows.length
             document.getElementById("count3").innerHTML=shows.length
         } else { 
             choose.classList.add("completed");
@@ -272,7 +272,7 @@ expires4.addEventListener("click", ()=>{
           
          }
          
-        
+        // Create an object to represent the course
         const courseObj = {
             title: titleValue,
             date: dateValue,
@@ -281,12 +281,13 @@ expires4.addEventListener("click", ()=>{
             state: state,
         };
 
-    
+        // Check if there are existing courses in local storage
         let savedCourses = JSON.parse(localStorage.getItem("courses")) || [];
 
+        // Add the new course to the array
         savedCourses.push(courseObj);
 
-        
+        // Save the updated courses array to local storage
         localStorage.setItem("courses", JSON.stringify(savedCourses));
 
         if(title.value === "" || date.value === "" || startTime.value === "" || stopTime.value === ""){ 
@@ -379,7 +380,7 @@ expires4.addEventListener("click", ()=>{
                     dones.innerHTML+=""
                     document.getElementById("count").innerHTML=shows.length
                     document.getElementById("count1").innerHTML=shows.length
-                    document.getElementById("count2").innerHTML=dones.length
+                    document.getElementById("count2").innerHTML=shows.length
                     document.getElementById("count3").innerHTML=shows.length
                 } else { 
                     choose.classList.add("completed");
@@ -423,7 +424,7 @@ expires4.addEventListener("click", ()=>{
 
    const editButtons = document.querySelectorAll(".edit");
 
-editButtons.forEach((editButton) => {
+editButtons.forEach(editButton => {
     editButton.addEventListener("click", () => {
         write.style.display="none" 
         name.style.display="None"    
@@ -432,11 +433,8 @@ editButtons.forEach((editButton) => {
         display.style.display="none" 
         completed.style.display="None" 
         expired.style.display="block"
+
     });
-    const saveEdit = editButton.getElementById(".save2");
-        saveEdit.addEventListener("click", ()=>{
-            alert("hello")
-        })
 
 });
    
