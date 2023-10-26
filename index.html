@@ -18,6 +18,7 @@
                  <h2>Welcome Back</h2> 
                  <button id="visit">Visit List</button> 
              </div> 
+             <!--Display Screen-->
              <div class="new" id="display"> 
                  <div class="displays"> 
                      <div class="display"> 
@@ -41,6 +42,8 @@
                      </div> 
                  </div> 
              </div> 
+
+             <!--Input Screen-->
              <div class="new" id="write"> 
                  <div class="displays"> 
                      <div class="display"> 
@@ -87,12 +90,13 @@
                      </div> 
                  </div> 
              </div> 
+             <!--Completed Task-->
              <div class="new" id="completed"> 
                  <div class="displays"> 
                      <div class="display"> 
                         <div class="cals">
                             <div class="cal"><p id="day3"></p></div>
-                            <div class="cal"><h2>DONE TASK</h2></div>
+                            <div class="cal"><h2>HISTORY</h2></div>
                             <div class="cal"><p id="time3"></p></div>
                          </div>
                      </div> 
@@ -111,18 +115,42 @@
                      </div> 
                  </div> 
              </div> 
+             <!--Edit Screen-->
              <div class="new" id="expired"> 
                  <div class="displays"> 
                      <div class="display"> 
                         <div class="cals">
                             <div class="cal"><p id="day4"></p></div>
-                            <div class="cal"><h2>VOID TASK</h2></div>
+                            <div class="cal"><h2>EDIT TASK</h2></div>
                             <div class="cal"><p id="time4"></p></div>
                          </div>
                      </div> 
                      <div class="display"> 
-                         
-                     </div> 
+                        <div class="enters"> 
+                            <div class="enter"> 
+                                <p>Title:</p> 
+                                <input type="text" id="title"> 
+                            </div> 
+                            <div class="enter"> 
+                                <p>Date:</p> 
+                                <input type="date" name="" id="date"> 
+                            </div> 
+                            <div class="enter"> 
+                                <p>Time:</p> 
+                                <div class="times"> 
+                                    <div class="time"> 
+                                        <p>Start:</p> 
+                                        <input type="time" name="" id="startTime"> 
+                                    </div> 
+                                    <div class="time"> 
+                                        <p>Stop:</p> 
+                                        <input type="time" name="" id="stopTime"> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="save"><button id="save2">Save</button></div> 
+                    </div> 
                      <div class="display"> 
                          <ul> 
                              <li><button id="home4"> <i class="fa-solid fa-house"></i></button></li> 

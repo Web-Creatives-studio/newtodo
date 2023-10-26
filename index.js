@@ -23,6 +23,107 @@ const name= document.getElementById("name")
  const expires3 =document.getElementById("expires3")
  const expires4 =document.getElementById("expires4")
 
+ 
+window.addEventListener("load", () => {
+    let savedCourses = JSON.parse(localStorage.getItem("courses")) || [];
+    
+    savedCourses.forEach(courseObj => {
+        results.innerHTML +=` 
+        <div class="shows" id="shows"> 
+            <div class="show"> 
+                <div class="titles"> 
+                    <div class="title"><h2>${courseObj.title}</h2></div> 
+                    <div class="title"><button class="edit"><i class="fa-solid fa-pen"></i></button></div> 
+                </div>
+            </div> 
+            <div class="show"> 
+                <div class="activities"> 
+                    <div class="activity"><button class="done"><i class="fa-solid fa-square-check"></i></button></div> 
+                    <div class="activity"><p>${courseObj.date}</p></div> 
+                    <div class="activity"><p class="state">${courseObj.state}</p></div> 
+                    <div class="activity"> 
+                    <p>${courseObj.startTime}</p> 
+                    <p>-</p> 
+                    <p>${courseObj.stopTime}</p> 
+                    </div> 
+                    <div class="activity"><button class="delete"><i class="fa-solid fa-trash"></i></button></div> 
+                </div> 
+            </div> 
+        </div>  
+
+`
+const shows = document.querySelectorAll(".shows");
+document.getElementById("count").innerHTML=shows.length
+document.getElementById("count1").innerHTML=shows.length
+document.getElementById("count2").innerHTML=shows.length
+document.getElementById("count3").innerHTML=shows.length
+
+
+shows.forEach((choose) => {
+const deleteButton = choose.querySelector(".delete");
+
+if (deleteButton) {
+deleteButton.addEventListener("click", () => {
+ choose.remove();
+ localStorage.clear()
+ document.getElementById("count").innerHTML=shows.length-1
+document.getElementById("count1").innerHTML=shows.length-1
+document.getElementById("count2").innerHTML=shows.length-1
+document.getElementById("count3").innerHTML=shows.length-1
+});
+}
+const doneButton = choose.querySelector(".done");
+const dones= document.querySelector(".dones");
+
+
+if (doneButton) {
+doneButton.addEventListener("click", () => { 
+ if (choose.classList.contains("completed")) { 
+            choose.classList.remove("completed"); 
+            choose.querySelector(".state").innerHTML=state
+            dones.innerHTML+=`""`
+            document.getElementById("count").innerHTML=shows.length
+            document.getElementById("count1").innerHTML=shows.length
+            document.getElementById("count2").innerHTML=dones.length
+            document.getElementById("count3").innerHTML=shows.length
+        } else { 
+            choose.classList.add("completed");
+            choose.querySelector(".state").innerHTML="Done"
+            dones.innerHTML +=` 
+                            <div class="shows" id="shows" style=" background:#13d7a6"> 
+                                <div class="show"> 
+                                    <div class="titles"> 
+                                        <div class="title"><h2>${courseObj.title}</h2></div> 
+                                        <div class="title"><button><i class="fa-solid fa-pen"></i></button></div> 
+                                    </div> 
+                                </div> 
+                                <div class="show"> 
+                                    <div class="activities"> 
+                                        <div class="activity"><button class="done"><i class="fa-solid fa-square-check"></i></button></div> 
+                                        <div class="activity"><p>${courseObj.date}</p></div> 
+                                        <div class="activity"><p class="state">Done</p></div> 
+                                        <div class="activity"> 
+                                        <p>${courseObj.startTime}</p> 
+                                        <p>-</p> 
+                                        <p>${courseObj.stopTime}</p> 
+                                        </div> 
+                                        <div class="activity"><button class="delete"><i class="fa-solid fa-trash"></i></button></div> 
+                                    </div> 
+                                </div> 
+                            </div>  
+         
+        `
+            document.getElementById("count").innerHTML=shows.length-1
+            document.getElementById("count1").innerHTML=shows.length-1
+            document.getElementById("count2").innerHTML=dones.length-1
+            document.getElementById("count3").innerHTML=shows.length-1
+        };
+});
+}
+});
+    });
+});
+
  visit.addEventListener("click", ()=>{ 
      name.style.display="None" 
      write.style.display="None" 
@@ -89,7 +190,7 @@ completes4.addEventListener("click", ()=>{
     updateCompleted()
 })
 
-expires1.addEventListener("click", ()=>{
+/*expires1.addEventListener("click", ()=>{
     updateExpired()
 })
 expires2.addEventListener("click", ()=>{
@@ -100,7 +201,7 @@ expires3.addEventListener("click", ()=>{
 })
 expires4.addEventListener("click", ()=>{
     updateExpired()
-})
+})*/
  
   
  function updateHome(){ 
@@ -137,109 +238,211 @@ expires4.addEventListener("click", ()=>{
  const title= document.getElementById("title")
      const date= document.getElementById("date") 
      const startTime= document.getElementById("startTime") 
-      const stopTime= document.getElementById("stopTime") 
+      const stopTime= document.getElementById("stopTime")  
   
- save.addEventListener("click", ()=>{ 
-     if(title.value === "" || date.value === "" || startTime.value === "" || stopTime.value === ""){ 
-         alert("enter") 
-     }else{ 
-         const titleValue= title.value 
-     const dateValue= date.value 
-     const startTimeValue= startTime.value 
-      const stopTimeValue= stopTime.value 
-      const state = updateState(startTimeValue, stopTimeValue)
-      function updateState() {
-        let d = new Date()
-    const now= d.toLocaleString('default', {   
-       hour:'numeric'  , 
-       minute:'numeric',
-       second:'numeric'     
-   }); 
-        let current = now
-         const start = startTime.value; 
-         const stop = stopTime.value; 
-      
-         if (start > current) { 
-             return "Upcoming"; 
-         } else if (start < current ) { 
-             return "Active";
-         } else if(stop < current) { 
-             return "Expired";   
-         }else{
-            return "invalid";
+ save.addEventListener("click", ()=>{
+    
+    if (title.value && date.value && startTime.value && stopTime.value  ){
+
+        const titleValue= title.value 
+        const dateValue= date.value 
+        const startTimeValue= startTime.value 
+         const stopTimeValue= stopTime.value 
+         const state = updateState(startTimeValue, stopTimeValue)
+         function updateState() {
+            let d = new Date()
+        const now= d.toLocaleString('default', {   
+           hour:'numeric'  , 
+           minute:'numeric',
+           second:'numeric'     
+           }); 
+            let current = now
+             const start = startTime.value; 
+             const stop = stopTime.value; 
+          
+             if (start > current) { 
+                 return "Upcoming"; 
+             } else if (start < current ) { 
+                 return "Active";
+             } else if(stop < current) { 
+                 return "Expired";   
+             }else{
+                return "invalid";
+             }
+          
          }
-      
+         
+        
+        const courseObj = {
+            title: titleValue,
+            date: dateValue,
+            startTime: startTimeValue,
+           stopTime: startTimeValue,
+            state: state,
+        };
+
+    
+        let savedCourses = JSON.parse(localStorage.getItem("courses")) || [];
+
+        savedCourses.push(courseObj);
+
+        
+        localStorage.setItem("courses", JSON.stringify(savedCourses));
+
+        if(title.value === "" || date.value === "" || startTime.value === "" || stopTime.value === ""){ 
+            alert("enter") 
+        }else{ 
+            const titleValue= title.value 
+        const dateValue= date.value 
+        const startTimeValue= startTime.value 
+         const stopTimeValue= stopTime.value 
+         const state = updateState(startTimeValue, stopTimeValue)
+         function updateState() {
+           let d = new Date()
+       const now= d.toLocaleString('default', {   
+          hour:'numeric'  , 
+          minute:'numeric',
+          second:'numeric'     
+          }); 
+           let current = now
+            const start = startTime.value; 
+            const stop = stopTime.value; 
+         
+            if (start > current) { 
+                return "Upcoming"; 
+            } else if (start < current ) { 
+                return "Active";
+            } else if(stop < current) { 
+                return "Expired";   
+            }else{
+               return "invalid";
+            }
+         
+        }
+   
+        updateHome() 
+     
+        results.innerHTML +=` 
+                            <div class="shows" id="shows"> 
+                                <div class="show"> 
+                                    <div class="titles"> 
+                                        <div class="title"><h2>${titleValue}</h2></div> 
+                                        <div class="title"><button class="edit"><i class="fa-solid fa-pen"></i></button></div> 
+                                    </div> 
+                                </div> 
+                                <div class="show"> 
+                                    <div class="activities"> 
+                                        <div class="activity"><button class="done"><i class="fa-solid fa-square-check"></i></button></div> 
+                                        <div class="activity"><p>${dateValue}</p></div> 
+                                        <div class="activity"><p class="state">${state}</p></div> 
+                                        <div class="activity"> 
+                                        <p>${startTimeValue}</p> 
+                                        <p>-</p> 
+                                        <p>${stopTimeValue}</p> 
+                                        </div> 
+                                        <div class="activity"><button class="delete"><i class="fa-solid fa-trash"></i></button></div> 
+                                    </div> 
+                                </div> 
+                            </div>  
+         
+        ` 
+        const shows = document.querySelectorAll(".shows");
+        document.getElementById("count").innerHTML=shows.length
+        document.getElementById("count1").innerHTML=shows.length
+        document.getElementById("count2").innerHTML=shows.length
+        document.getElementById("count3").innerHTML=shows.length
+   
+   
+   shows.forEach((choose) => {
+     const deleteButton = choose.querySelector(".delete");
+   
+     if (deleteButton) {
+       deleteButton.addEventListener("click", () => {
+         choose.remove();
+         localStorage.clear()
+         document.getElementById("count").innerHTML=shows.length-1
+        document.getElementById("count1").innerHTML=shows.length-1
+        document.getElementById("count2").innerHTML=shows.length-1
+        document.getElementById("count3").innerHTML=shows.length-1
+       });
      }
+     const doneButton = choose.querySelector(".done");
+     //const dones= document.querySelector(".dones");
+   
+   
+     if (doneButton) {
+       doneButton.addEventListener("click", () => { 
+         if (choose.classList.contains("completed") && choose.click) { 
 
-     updateHome() 
-  
-     results.innerHTML +=` 
-                         <div class="shows" id="shows"> 
-                             <div class="show"> 
-                                 <div class="titles"> 
-                                     <div class="title"><h2>${titleValue}</h2></div> 
-                                     <div class="title"><button><i class="fa-solid fa-pen"></i></button></div> 
-                                 </div> 
-                             </div> 
-                             <div class="show"> 
-                                 <div class="activities"> 
-                                     <div class="activity"><button class="done"><i class="fa-solid fa-square-check"></i></button></div> 
-                                     <div class="activity"><p>${dateValue}</p></div> 
-                                     <div class="activity"><p id="state">${state}</p></div> 
-                                     <div class="activity"> 
-                                     <p>${startTimeValue}</p> 
-                                     <p>-</p> 
-                                     <p>${stopTimeValue}</p> 
-                                     </div> 
-                                     <div class="activity"><button class="delete"><i class="fa-solid fa-trash"></i></button></div> 
-                                 </div> 
-                             </div> 
-                         </div>  
-      
-     ` 
-     const shows = document.querySelectorAll(".shows");
-     document.getElementById("count").innerHTML=shows.length
-     document.getElementById("count1").innerHTML=shows.length
-     document.getElementById("count2").innerHTML=shows.length
-     document.getElementById("count3").innerHTML=shows.length
+                    choose.classList.remove("completed"); 
+                    choose.querySelector(".state").innerHTML=state
+                    dones.innerHTML+=""
+                    document.getElementById("count").innerHTML=shows.length
+                    document.getElementById("count1").innerHTML=shows.length
+                    document.getElementById("count2").innerHTML=dones.length
+                    document.getElementById("count3").innerHTML=shows.length
+                } else { 
+                    choose.classList.add("completed");
+                    choose.querySelector(".state").innerHTML="Done"
+                    dones.innerHTML +=` 
+                            <div class="shows" id="shows" style=" background:#13d7a6"> 
+                                <div class="show"> 
+                                    <div class="titles"> 
+                                        <div class="title"><h2>${titleValue}</h2></div> 
+                                        <div class="title"><button><i class="fa-solid fa-pen"></i></button></div> 
+                                    </div> 
+                                </div> 
+                                <div class="show"> 
+                                    <div class="activities"> 
+                                        <div class="activity"><button class="done"><i class="fa-solid fa-square-check"></i></button></div> 
+                                        <div class="activity"><p>${dateValue}</p></div> 
+                                        <div class="activity"><p class="state">Done</p></div> 
+                                        <div class="activity"> 
+                                        <p>${startTimeValue}</p> 
+                                        <p>-</p> 
+                                        <p>${stopTimeValue}</p> 
+                                        </div> 
+                                        <div class="activity"><button class="delete"><i class="fa-solid fa-trash"></i></button></div> 
+                                    </div> 
+                                </div> 
+                            </div>  
+         
+        `
+                    document.getElementById("count").innerHTML=shows.length-1
+                    document.getElementById("count1").innerHTML=shows.length-1
+                    document.getElementById("count2").innerHTML=dones.length-1
+                    document.getElementById("count3").innerHTML=shows.length-1
+                };
+                title.value=" " 
+                date.value="" 
+                startTime.value="HH:mm:ss" 
+                 stopTime.value=" HH:mm:ss" 
+       });
+     }
+   });
 
-     const dones = document.getElementById("dones")
+   const editButtons = document.querySelectorAll(".edit");
 
-shows.forEach((choose) => {
-  const deleteButton = choose.querySelector(".delete");
-
-  if (deleteButton) {
-    deleteButton.addEventListener("click", () => {
-      choose.remove();
-      document.getElementById("count").innerHTML=shows.length-1
-     document.getElementById("count1").innerHTML=shows.length-1
-     document.getElementById("count2").innerHTML=shows.length-1
-     document.getElementById("count3").innerHTML=shows.length-1
+editButtons.forEach((editButton) => {
+    editButton.addEventListener("click", () => {
+        write.style.display="none" 
+        name.style.display="None"    
+        history.style.display="None" 
+        wel.style.display="None" 
+        display.style.display="none" 
+        completed.style.display="None" 
+        expired.style.display="block"
     });
-  }
-  const doneButton = choose.querySelector(".done");
+    const saveEdit = editButton.getElementById(".save2");
+        saveEdit.addEventListener("click", ()=>{
+            alert("hello")
+        })
 
-  if (doneButton) {
-    doneButton.addEventListener("click", () => {
-       
-      if (choose.classList.contains("completed")) { 
-                 choose.classList.remove("completed"); 
-                 document.getElementById("count").innerHTML=shows.length
-                 document.getElementById("count1").innerHTML=shows.length
-                 document.getElementById("count2").innerHTML=shows.length
-                 document.getElementById("count3").innerHTML=shows.length
-             } else { 
-                 choose.classList.add("completed"); 
-                 document.getElementById("count").innerHTML=shows.length-1
-                 document.getElementById("count1").innerHTML=shows.length-1
-                 document.getElementById("count2").innerHTML=shows.length-1
-                 document.getElementById("count3").innerHTML=shows.length-1
-             };
-    });
-  }
 });
+   
+        } 
 
-     } 
+    } 
      title.value=" " 
      date.value="" 
      startTime.value="HH:mm:ss" 
@@ -281,3 +484,5 @@ function updateTime(){
 
 updateTime()
 setInterval(updateTime, 1000)
+
+

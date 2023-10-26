@@ -223,7 +223,6 @@
     color: blue;
   }
   
-
  
  @media screen and (max-width:480px){
      .do{
@@ -261,3 +260,5 @@
         width:40vw;
     }
  }
+
+
